@@ -2,6 +2,7 @@ package com.example.demo.Configurations;
 
 
 import com.example.demo.Repositories.UserRepository;
+import com.example.demo.Services.SSUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +26,7 @@ public class SecurityConfiguration
         return new BCryptPasswordEncoder();
     }
     @Autowired
-    private SSUserDetailsService userDetailsService;
+    private  SSUserDetailsService userDetailsService;
 
     @Autowired
     private UserRepository appUserRepository;
@@ -35,6 +36,9 @@ public class SecurityConfiguration
             Exception {
             return new SSUserDetailsService(appUserRepository); }
 
+
+
+    // Here is where you add individual administrative permissions
     @Override
     protected void configure(HttpSecurity http) throws  Exception{
         http.authorizeRequests()
@@ -69,12 +73,11 @@ public class SecurityConfiguration
                 .csrf().disable();
 
         http
-                .headers().frameOPtions().disable();
+                .headers().frameOptions().disable();
     }
 
 
 
-    // Here is where you add individual administrative permissions
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {

@@ -1,6 +1,7 @@
 package com.example.demo.Beans;
 
 
+
 import javax.persistence.*;
 import java.util.Collection;
 
